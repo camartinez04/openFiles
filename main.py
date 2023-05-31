@@ -107,6 +107,8 @@ def main():
     parser.add_argument('--aws', action='store_true', help='Display AWS logs')
     parser.add_argument('--storage', action='store_true', help='Display storage logs')
     parser.add_argument('--cloudsnap', action='store_true', help='Display cloudsnap backup logs')
+    parser.add_argument('--all', action='store_true', help='Display all logs')
+
     args = parser.parse_args()
 
     log_docker = LogDocker(args.file)
@@ -124,7 +126,9 @@ def main():
         print(log_docker.get_storage_logs())
     if args.cloudsnap:
         print(log_docker.get_cloudsnap_backup_logs())
-
+    if args.all:
+        print(log_docker.colorize_dataframe(log_docker.df))
+    
 
 if __name__ == "__main__":
     main()
